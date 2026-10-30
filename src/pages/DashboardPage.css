@@ -1,0 +1,572 @@
+/* Dashboard Styles — Strict 3-Color Palette: Sage, Walnut, Amber */
+
+.dashboard {
+  padding: var(--space-8) 0 var(--space-16);
+  min-height: calc(100vh - 68px);
+  background-color: var(--bg-primary);
+}
+
+.dashboard__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: var(--space-5);
+}
+
+/* Greeting */
+.dashboard__greeting {
+  grid-column: 1 / 3;
+}
+
+.dashboard__greeting-salutation {
+  font-size: 1rem;
+  color: var(--text-primary);
+  opacity: 0.8;
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.dashboard__greeting-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.dashboard__greeting-date {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+}
+
+/* Weather Card (Sage and Amber Tints) */
+.dashboard__weather-card {
+  grid-column: 3;
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 120px;
+  border: 1px solid rgba(169,184,135,0.3);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  background: var(--bg-card);
+  box-shadow: none;
+}
+
+.dashboard__weather-card:hover {
+  transform: translateY(-3px);
+  box-shadow: none;
+  border-color: var(--amber-300);
+}
+
+.weather--hot { background: var(--amber-50); border-color: var(--amber-200); }
+.weather--warm { background: var(--sage-50); border-color: var(--sage-200); }
+.weather--mild { background: var(--sage-50); border-color: var(--sage-200); }
+.weather--cold { background: var(--walnut-50); border-color: var(--walnut-200); }
+.weather--rainy { background: var(--sage-100); border-color: var(--sage-300); }
+.weather--snowy { background: var(--sage-50); border-color: var(--sage-200); }
+
+.dashboard__weather-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.dashboard__weather-temp {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.dashboard__weather-condition {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: var(--space-1);
+}
+
+.dashboard__weather-city {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.dashboard__weather-humidity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.dashboard__weather-tip {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* Analyzer Hero Card */
+.dashboard__analyzer-card {
+  grid-column: 1 / 3;
+  grid-row: 2;
+  position: relative;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  min-height: 260px;
+  box-shadow: none;
+}
+
+.dashboard__analyzer-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.dashboard__analyzer-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dashboard__analyzer-overlay {
+  position: absolute;
+  inset: 0;
+  background: #2E3D28;
+}
+
+.dashboard__analyzer-content {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: var(--space-6);
+}
+
+.dashboard__analyzer-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: var(--space-2) 0;
+}
+
+.dashboard__analyzer-desc {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.dashboard__analyzer-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.dashboard__analyzer-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  background: rgba(255,255,255,0.14);
+  border: 1.5px solid rgba(255,255,255,0.28);
+  border-radius: var(--radius-xl);
+  color: white;
+  backdrop-filter: none;
+  transition: all var(--transition-base);
+  flex: 1;
+  min-width: 140px;
+}
+
+.dashboard__analyzer-btn:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-2px);
+}
+
+.dashboard__analyzer-btn--qr {
+  border-color: var(--amber);
+  background: rgba(169, 184, 135, 0.28);
+}
+
+.dashboard__analyzer-btn--qr:hover {
+  background: rgba(169, 184, 135, 0.45);
+  border-color: var(--amber);
+}
+
+.dashboard__analyzer-btn-label {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 1;
+}
+
+.dashboard__analyzer-btn-sub {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.75);
+  margin-top: 2px;
+}
+
+/* Calorie Card (Amber Number, Walnut Labels, Sage Progress Ring) */
+.dashboard__calorie-card {
+  grid-column: 3;
+  grid-row: 2;
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  border: 1px solid rgba(169,184,135,0.3);
+  box-shadow: none;
+  transition: all var(--transition-base);
+}
+
+.dashboard__calorie-card:hover {
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+
+.dashboard__calorie-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.dashboard__calorie-ring {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard__calorie-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.dashboard__calorie-value {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--amber);
+  line-height: 1;
+}
+
+.dashboard__calorie-label {
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.dashboard__macros {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.dashboard__macro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.dashboard__macro-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard__macro-name {
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.dashboard__macro-val {
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+}
+
+/* Hydration Card */
+.dashboard__hydration-card {
+  grid-column: 1;
+  grid-row: 3;
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  border: 1px solid rgba(169,184,135,0.3);
+  box-shadow: none;
+}
+
+.dashboard__hydration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.dashboard__hydration-value {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  margin: var(--space-2) 0 var(--space-1);
+}
+
+.dashboard__hydration-glass {
+  width: 48px;
+  height: 80px;
+  border: 2px solid var(--sage-300);
+  border-radius: 0 0 12px 12px;
+  background: var(--sage-50);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dashboard__hydration-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--sage);
+  border-radius: 0 0 10px 10px;
+  transition: height 0.8s ease;
+  min-height: 4px;
+}
+
+.dashboard__hydration-btns {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* Meal Plan Card */
+.dashboard__meal-plan {
+  grid-column: 2 / 4;
+  grid-row: 3;
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  border: 1px solid rgba(169,184,135,0.3);
+  box-shadow: none;
+}
+
+.dashboard__meal-list {
+  padding: var(--space-3) 0;
+}
+
+.dashboard__meal-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  transition: background var(--transition-fast);
+}
+
+.dashboard__meal-item:hover {
+  background: var(--sage-50);
+}
+
+.dashboard__meal-image {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(169,184,135,0.3);
+}
+
+.dashboard__meal-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.dashboard__meal-type {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: var(--amber);
+}
+
+.dashboard__meal-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 1px;
+}
+
+.dashboard__meal-cal {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Recent Analyses */
+.dashboard__recent {
+  grid-column: 1 / 3;
+  grid-row: 4;
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  border: 1px solid rgba(169,184,135,0.3);
+  box-shadow: none;
+}
+
+.dashboard__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+}
+
+.dashboard__empty-icon { font-size: 2.5rem; }
+.dashboard__empty-title { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+.dashboard__empty-desc { font-size: 0.875rem; color: var(--text-muted); max-width: 280px; }
+
+.dashboard__history-list { padding: var(--space-2) 0; }
+
+.dashboard__history-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  transition: background var(--transition-fast);
+  cursor: pointer;
+}
+
+.dashboard__history-item:hover { background: var(--sage-50); }
+
+.dashboard__history-img {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.dashboard__history-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.dashboard__history-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.dashboard__history-cal {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--amber);
+  font-family: var(--font-sans);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Quick Links */
+.dashboard__quick-links {
+  grid-column: 3;
+  grid-row: 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.dashboard__quick-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.dashboard__quick-link:hover {
+  transform: translateX(4px);
+  box-shadow: none;
+}
+
+.dashboard__quick-link-emoji { font-size: 1.25rem; flex-shrink: 0; }
+
+.dashboard__quick-link-label {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dashboard__quick-link-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* Disclaimer */
+.dashboard__disclaimer {
+  grid-column: 1 / 4;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--amber-50);
+  border: 1px solid var(--amber-200);
+  border-radius: var(--radius-xl);
+}
+
+.dashboard__disclaimer p {
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dashboard__grid { grid-template-columns: 1fr 1fr; }
+  .dashboard__greeting { grid-column: 1 / 2; }
+  .dashboard__weather-card { grid-column: 2; }
+  .dashboard__analyzer-card { grid-column: 1 / 3; }
+  .dashboard__calorie-card { grid-column: 1; }
+  .dashboard__hydration-card { grid-column: 2; }
+  .dashboard__meal-plan { grid-column: 1 / 3; }
+  .dashboard__recent { grid-column: 1 / 3; }
+  .dashboard__quick-links { grid-column: 1 / 3; flex-direction: row; flex-wrap: wrap; }
+  .dashboard__quick-link { flex: 1; min-width: 200px; }
+  .dashboard__disclaimer { grid-column: 1 / 3; }
+}
+
+@media (max-width: 768px) {
+  .dashboard { padding: var(--space-4) 0 var(--space-12); }
+  .dashboard__grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .dashboard__greeting { grid-column: 1; }
+  .dashboard__weather-card { grid-column: 1; }
+  .dashboard__analyzer-card { grid-column: 1; grid-row: auto; min-height: 220px; }
+  .dashboard__calorie-card { grid-column: 1; }
+  .dashboard__hydration-card { grid-column: 1; }
+  .dashboard__meal-plan { grid-column: 1; }
+  .dashboard__recent { grid-column: 1; }
+  .dashboard__quick-links { grid-column: 1; flex-direction: column; }
+  .dashboard__disclaimer { grid-column: 1; }
+  .dashboard__analyzer-actions { flex-direction: column; }
+  .dashboard__analyzer-btn { min-width: unset; }
+}

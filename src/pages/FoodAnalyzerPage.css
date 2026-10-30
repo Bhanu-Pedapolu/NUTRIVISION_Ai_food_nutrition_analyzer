@@ -1,0 +1,1050 @@
+/* NutriVision — Food Analyzer Styles (Strict 3-Color Palette: Sage, Walnut, Amber) */
+
+.analyzer-page {
+  padding-bottom: var(--space-16);
+  min-height: calc(100vh - 68px);
+  background: var(--bg-primary);
+}
+
+.analyzer-header {
+  padding: var(--space-10) 0 var(--space-6);
+  background: #2E3D28;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: var(--space-8);
+}
+
+.analyzer-header__content {
+  max-width: 760px;
+}
+
+.analyzer-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: var(--space-3) 0 var(--space-2);
+  color: var(--text-primary);
+}
+
+.analyzer-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Card Container */
+.analyzer-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(169,184,135,0.3);
+  border-radius: var(--radius-xl);
+  box-shadow: none;
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+/* Tabs & Controller */
+.upload-controller {
+  margin-bottom: var(--space-8);
+}
+
+.analyzer-tabs {
+  display: flex;
+  background: #2E3D28;
+  border-bottom: none;
+  overflow-x: auto;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
+
+.analyzer-tab {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #E8E9DF;
+  border: 1.5px solid #A9B887;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-base);
+  background: transparent;
+}
+
+.analyzer-tab:hover {
+  background: rgba(169,184,135,0.15);
+  color: #E8E9DF;
+}
+
+.analyzer-tab.active {
+  background: #A9B887;
+  color: #2E3D28;
+  border-color: #A9B887;
+  font-weight: 700;
+}
+
+.analyzer-tab-content {
+  padding: var(--space-6);
+}
+
+/* Dropzone */
+.dropzone {
+  border: 2px dashed #A9B887;
+  border-radius: var(--radius-xl);
+  padding: var(--space-12) var(--space-6);
+  text-align: center;
+  background: #2E3D28;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.dropzone:hover {
+  border-color: #E8E9DF;
+  background: rgba(169,184,135,0.08);
+  transform: translateY(-2px);
+}
+
+.dropzone__icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: rgba(169,184,135,0.18);
+  color: #A9B887;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-4);
+  transition: transform var(--transition-fast);
+}
+
+.dropzone:hover .dropzone__icon-wrap {
+  transform: scale(1.08);
+}
+
+.dropzone h3 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.dropzone p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-4);
+}
+
+.dropzone__badges {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.dropzone__badges span {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(169,184,135,0.3);
+}
+
+/* Camera Viewfinder */
+.camera-container {
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  position: relative;
+  background: #000;
+}
+
+.camera-viewfinder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 480px;
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+}
+
+.camera-reticle {
+  position: absolute;
+  inset: 24px;
+  pointer-events: none;
+}
+
+.reticle-corner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-color: var(--amber);
+  border-style: solid;
+}
+
+.reticle-corner.tl { top: 0; left: 0; border-width: 4px 0 0 4px; border-radius: 6px 0 0 0; }
+.reticle-corner.tr { top: 0; right: 0; border-width: 4px 4px 0 0; border-radius: 0 6px 0 0; }
+.reticle-corner.bl { bottom: 0; left: 0; border-width: 0 0 4px 4px; border-radius: 0 0 0 6px; }
+.reticle-corner.br { bottom: 0; right: 0; border-width: 0 4px 4px 0; border-radius: 0 0 6px 0; }
+
+.camera-scan-pulse {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--amber);
+  box-shadow: none;
+  animation: scan-line 2.5s ease-in-out infinite;
+}
+
+.camera-controls {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.camera-shutter-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--amber);
+  border: 4px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: none;
+  transition: transform var(--transition-fast);
+}
+
+.camera-shutter-btn:hover {
+  transform: scale(1.08);
+}
+
+.shutter-inner {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+}
+
+.camera-error {
+  padding: var(--space-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-primary);
+}
+
+/* Samples Grid */
+.samples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+.sample-item-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  padding: 0;
+}
+
+.sample-item-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--amber);
+  box-shadow: none;
+}
+
+.sample-img-wrap {
+  position: relative;
+  height: 130px;
+}
+
+.sample-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sample-tag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(46, 61, 40, 0.85);
+  backdrop-filter: none;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+
+.sample-info {
+  padding: var(--space-3);
+}
+
+.sample-info h4 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.sample-info p {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--amber);
+}
+
+/* QR Promo */
+.qr-sync-promo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-6);
+  background: var(--sage-50);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--sage-200);
+}
+
+.qr-preview-box {
+  padding: var(--space-4);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+  border: 1px solid rgba(169,184,135,0.3);
+}
+
+.qr-sync-text h3 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.qr-sync-text p {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Results Section */
+.analysis-result-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.result-hero-card {
+  padding: var(--space-8);
+  background: var(--bg-card);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(169,184,135,0.3);
+  box-shadow: none;
+}
+
+.result-hero-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.result-image-wrapper {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  margin-bottom: var(--space-4);
+  box-shadow: none;
+  border: 1px solid rgba(169,184,135,0.3);
+}
+
+.result-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.result-ai-confidence {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(46, 61, 40, 0.9);
+  backdrop-filter: none;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.result-ingredients-box .sub-title {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.05em;
+}
+
+.ingredients-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ingredient-pill {
+  background: var(--sage-50);
+  border: 1px solid var(--sage-200);
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+}
+
+/* Result Content Column */
+.result-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.result-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.dietary-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--sage-100);
+  color: var(--text-primary);
+  border: 1px solid var(--sage-300);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.dietary-badge.high-protein { background: var(--amber-100); color: var(--amber-800); border-color: var(--amber-300); }
+.dietary-badge.vegan { background: var(--sage-100); color: var(--sage-800); border-color: var(--sage-300); }
+.dietary-badge.vegetarian { background: var(--sage-100); color: var(--sage-800); border-color: var(--sage-300); }
+.dietary-badge.non-vegetarian { background: var(--walnut-100); color: var(--text-primary); border-color: var(--walnut-300); }
+
+.result-food-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.result-serving-base {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Health Score Pill */
+.health-score-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--sage-50);
+  border: 1px solid var(--sage-200);
+  border-radius: var(--radius-xl);
+}
+
+.health-score-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 3.5px solid var(--amber);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  background: var(--bg-card);
+}
+
+.score-num {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--amber);
+}
+
+.score-label {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.health-score-grade {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.health-score-desc {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Servings Multiplier */
+.servings-controller {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--sage-50);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-6);
+  border: 1px solid var(--sage-200);
+}
+
+.servings-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.servings-buttons {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.servings-btn {
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1.5px solid var(--walnut);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.servings-btn:hover {
+  background: var(--walnut-100);
+}
+
+.servings-btn.active {
+  background: var(--amber);
+  color: #ffffff;
+  border-color: var(--amber);
+  box-shadow: none;
+}
+
+/* Macros Highlight Grid (Protein: Amber, Carbs: Sage, Fat: Walnut, Calories: Amber) */
+.macros-highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.macro-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  text-align: center;
+  transition: all var(--transition-base);
+}
+
+.macro-card:hover {
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.macro-icon {
+  font-size: 1.25rem;
+  margin-bottom: 2px;
+}
+
+.macro-card.cal { border-top: 4px solid var(--amber); }
+.macro-card.pro { border-top: 4px solid var(--amber); }
+.macro-card.carb { border-top: 4px solid var(--sage); }
+.macro-card.fat { border-top: 4px solid var(--walnut); }
+.macro-card.fib { border-top: 4px solid var(--sage); }
+
+.macro-val {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.macro-card.cal .macro-val { color: var(--amber); }
+.macro-card.pro .macro-val { color: var(--amber); }
+.macro-card.carb .macro-val { color: var(--sage-700); }
+.macro-card.fat .macro-val { color: var(--text-primary); }
+.macro-card.fib .macro-val { color: var(--sage-700); }
+
+.macro-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  opacity: 0.8;
+  margin-bottom: var(--space-2);
+}
+
+.macro-bar {
+  height: 5px;
+  background: var(--sage-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.macro-bar span {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-full);
+}
+
+.macro-card.cal .macro-bar span { background: var(--amber); }
+.macro-card.pro .macro-bar span { background: var(--amber); }
+.macro-card.carb .macro-bar span { background: var(--sage); }
+.macro-card.fat .macro-bar span { background: var(--walnut); }
+.macro-card.fib .macro-bar span { background: var(--sage-600); }
+
+/* Result Actions */
+.result-actions-bar {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* Deep Dive Grid (Micronutrients & Clinical Insights) */
+.nutrition-deep-dive-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.deep-dive-card {
+  padding: var(--space-6);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(169,184,135,0.3);
+  box-shadow: none;
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Micronutrients List */
+.micro-group-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  opacity: 0.8;
+  margin-bottom: var(--space-2);
+}
+
+.micro-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+  border-radius: 4px;
+}
+
+.micro-row:nth-child(even) {
+  background: var(--sage-50);
+}
+
+.micro-name-col strong {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.micro-role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.micro-metric-col {
+  text-align: right;
+}
+
+.micro-amount {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.micro-pct {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--amber);
+}
+
+/* Allergen Alert */
+.allergen-alert-box {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--amber-50);
+  border: 1.5px solid var(--amber-300);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-4);
+  font-size: 0.875rem;
+}
+
+.allergen-alert-box.safe {
+  background: var(--sage-50);
+  border-color: var(--sage-300);
+}
+
+.alert-icon { color: var(--amber); flex-shrink: 0; }
+.safe-icon { color: var(--sage); flex-shrink: 0; }
+
+.allergen-alert-box strong {
+  display: block;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.allergen-alert-box p {
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+/* Considerations */
+.health-considerations-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.consideration-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.bullet-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sage);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+.consideration-item p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Preparation Guide Card */
+.recipe-guide-card {
+  padding: var(--space-6);
+  background: var(--bg-card);
+  border: 1px solid rgba(169,184,135,0.3);
+  border-radius: var(--radius-xl);
+}
+
+.recipe-instructions-body {
+  margin-top: var(--space-4);
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+}
+
+.recipe-instructions-text {
+  white-space: pre-line;
+  background: var(--sage-50);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--sage-200);
+  color: var(--text-primary);
+}
+
+/* Healthier Alternatives */
+.alternatives-section {
+  margin-top: var(--space-6);
+}
+
+.section-header-inline {
+  margin-bottom: var(--space-4);
+}
+
+.section-subtext {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.alternatives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.alternative-card {
+  display: flex;
+  gap: var(--space-4);
+  background: var(--bg-card);
+  border: 1px solid rgba(169,184,135,0.3);
+  border-radius: var(--radius-xl);
+  padding: var(--space-3);
+  align-items: center;
+  transition: all var(--transition-base);
+}
+
+.alternative-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--amber-300);
+  box-shadow: none;
+}
+
+.alt-thumb {
+  width: 76px;
+  height: 76px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.alt-body { flex: 1; }
+
+.alt-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.alt-title-row h4 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.alt-cal {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--amber);
+}
+
+.alt-reason {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.alt-benefit {
+  font-size: 0.75rem;
+  color: var(--sage-700);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.alt-macros {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+/* AI Scanning Modal */
+.scanning-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background: rgba(46, 61, 40, 0.75);
+  backdrop-filter: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.scanning-modal {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  box-shadow: none;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+.scan-progress-bar {
+  height: 8px;
+  background: var(--sage-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.scan-progress-fill {
+  height: 100%;
+  background: var(--amber);
+  border-radius: var(--radius-full);
+}
+
+.scan-percent {
+  font-size: 0.75rem;
+  color: var(--amber);
+  font-weight: 700;
+}
+
+/* QR Modal Backdrop */
+.qr-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(46, 61, 40, 0.75);
+  backdrop-filter: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.qr-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  box-shadow: none;
+  text-align: center;
+}
+
+.qr-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.qr-modal-content h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: var(--space-2) 0 var(--space-2);
+}
+
+.qr-modal-content p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+  line-height: 1.5;
+}
+
+.qr-modal-code-wrapper {
+  display: inline-block;
+  padding: var(--space-4);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  box-shadow: none;
+  border: 2px solid var(--border-light);
+  margin-bottom: var(--space-4);
+}
+
+.qr-status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+/* Responsiveness */
+@media (max-width: 900px) {
+  .result-hero-grid { grid-template-columns: 1fr; }
+  .macros-highlight-grid { grid-template-columns: repeat(3, 1fr); }
+  .nutrition-deep-dive-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .macros-highlight-grid { grid-template-columns: repeat(2, 1fr); }
+  .qr-sync-promo { flex-direction: column; text-align: center; }
+}

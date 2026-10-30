@@ -1,0 +1,962 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --radius-none: 0px;
+  --radius-xs: 0.25rem;
+  --radius-default: 0.75rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+  --color-button-ripple-color: var(--button-ripple-color);
+}
+
+/* ==========================================================================
+   NUTRIVISION — 3-COLOR WELLNESS DESIGN SYSTEM (FROM USER PALETTE)
+   Palette:
+   - Soft White: #E8E9DF
+   - Sage Green: #A9B887
+   - Deep Olive: #2E3D28
+   ========================================================================== */
+
+:root {
+  /* Three Required Base CSS Variables from Image */
+  --soft-white: #E8E9DF;
+  --sage-green: #A9B887;
+  --deep-olive: #2E3D28;
+
+  /* Primary Three-Color Tokens */
+  --sage: #A9B887;
+  --walnut: #E8E9DF;          /* remapped to cream for dark-bg contrast */
+  --amber: #C5D89A;           /* brightened sage for accents */
+  --olive: #2E3D28;
+  --olive-dark: #202B1C;
+  --olive-light: #44563a;
+
+  /* Systematic RGB Channels */
+  --soft-white-rgb: 232, 233, 223;
+  --sage-rgb: 169, 184, 135;
+  --walnut-rgb: 46, 61, 40;
+  --olive-rgb: 46, 61, 40;
+  --amber-rgb: 197, 216, 154;
+
+  /* Soft White Tints */
+  --soft-white-50: #fbfcf9;
+  --soft-white-100: #f4f5ee;
+  --soft-white-200: #E8E9DF;
+  --soft-white-300: #dedfd3;
+  --soft-white-400: #d1d3c2;
+
+  /* Sage Green Tints & Shades */
+  --sage-50: #253321;
+  --sage-100: #2a3b25;
+  --sage-200: #344a2e;
+  --sage-300: #3d5836;
+  --sage-400: #A9B887;
+  --sage-500: #A9B887;
+  --sage-600: #bfd0a4;
+  --sage-700: #d0e0b8;
+  --sage-800: #deeaca;
+  --sage-900: #ecf3e0;
+
+  /* Deep Olive Tints & Shades (dark surfaces) */
+  --walnut-50: #1a2417;
+  --walnut-100: #1f2b1b;
+  --walnut-200: #253321;
+  --walnut-300: #2e3d28;
+  --walnut-400: #3a4e33;
+  --walnut-500: #495a41;
+  --walnut-600: #A9B887;
+  --walnut-700: #bfd0a4;
+  --walnut-800: #d6dfc3;
+  --walnut-900: #E8E9DF;
+
+  /* Amber Glow — brightened sage highlights */
+  --amber-50: #1f2b1b;
+  --amber-100: #253321;
+  --amber-200: #344a2e;
+  --amber-300: #A9B887;
+  --amber-400: #bfd0a4;
+  --amber-500: #C5D89A;
+  --amber-600: #d0e0b8;
+  --amber-700: #deeaca;
+  --amber-800: #ecf3e0;
+  --amber-900: #f4f8ec;
+
+  /* Surfaces & Backgrounds — Deep Olive palette */
+  --bg-primary: #2E3D28;             /* Deep Olive main bg */
+  --bg-secondary: #253321;           /* Slightly lighter olive panel */
+  --bg-card: #2E3D28;                /* Card surface */
+  --bg-card-warm: #344a2e;
+  --bg-card-sage: #253321;
+  --bg-overlay: rgba(46, 61, 40, 0.96);
+
+  /* Navbar & Footer — Deep Olive */
+  --navbar-bg: #2E3D28;
+  --navbar-bg-scrolled: rgba(46, 61, 40, 0.98);
+  --navbar-text: #E8E9DF;
+  --navbar-text-muted: #E8E9DF;
+  --footer-bg: #253321;
+  --footer-text: #E8E9DF;
+  --footer-text-muted: rgba(232, 233, 223, 0.88);
+
+  /* Typography Colors — light on dark */
+  --text-primary: #E8E9DF;           /* Soft cream for main text */
+  --text-secondary: rgba(232, 233, 223, 0.85);
+  --text-muted: rgba(232, 233, 223, 0.65);
+  --text-subtle: rgba(232, 233, 223, 0.45);
+  --text-inverted: #172114;
+  --text-green: #A9B887;             /* Sage accent */
+  --text-amber: #C5D89A;             /* Bright sage highlight */
+  --text-walnut: #E8E9DF;
+
+  /* Aliased Green & Accent tokens */
+  --green-900: var(--sage-900);
+  --green-800: var(--sage-800);
+  --green-700: var(--sage-700);
+  --green-600: var(--sage-600);
+  --green-500: var(--sage-500);
+  --green-400: var(--sage-400);
+  --green-300: var(--sage-300);
+  --green-200: var(--sage-200);
+  --green-100: var(--sage-100);
+  --green-50:  var(--sage-50);
+
+  --accent-600: var(--sage-600);
+  --accent-500: var(--sage);
+  --accent-400: var(--sage-400);
+  --accent-300: var(--sage-300);
+  --accent-200: var(--sage-200);
+  --accent-100: var(--sage-100);
+  --accent-50:  var(--sage-50);
+
+  /* Borders */
+  --border-light: rgba(169, 184, 135, 0.15);
+  --border-medium: rgba(169, 184, 135, 0.30);
+  --border-walnut: #3d5836;
+  --border-sage: #A9B887;
+  --border-amber: #C5D89A;
+  --border-green: var(--sage);
+  --border-color: rgba(169, 184, 135, 0.18);
+  --card-bg: #253321;
+
+  /* Semantic States */
+  --success: var(--sage);
+  --warning: #C5D89A;
+  --danger: #e07a7a;
+  --info: var(--sage-600);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Border Radius */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+  --radius-3xl: 2.5rem;
+  --radius-full: 9999px;
+
+  /* Dark Shadows */
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
+  --shadow-amber: none;
+  --shadow-amber-lg: none;
+  --shadow-sage: none;
+  --shadow-green: none;
+  --shadow-green-lg: none;
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-sans: 'DM Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'DM Sans', 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Text size tokens used in pages */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  /* Transitions */
+  --transition-fast: 180ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-base: 280ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-slow: 420ms cubic-bezier(0.2, 0, 0, 1);
+
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-toast: 1090;
+
+  --button-ripple-color: rgba(197, 216, 154, 0.35);
+}
+
+/* Light Mode override — if user switches to light */
+[data-theme="light"] {
+  --bg-primary: #E8E9DF;
+  --bg-secondary: #f2f4ec;
+  --bg-card: #ffffff;
+  --bg-card-warm: #fbfcfa;
+  --bg-card-sage: #edf2e5;
+  --bg-overlay: rgba(232, 233, 223, 0.96);
+
+  --navbar-bg: #2E3D28;
+  --navbar-bg-scrolled: rgba(46, 61, 40, 0.98);
+  --footer-bg: #202B1C;
+
+  --text-primary: #2E3D28;
+  --text-secondary: rgba(46, 61, 40, 0.82);
+  --text-muted: rgba(46, 61, 40, 0.62);
+  --text-subtle: rgba(46, 61, 40, 0.42);
+  --text-inverted: #E8E9DF;
+  --text-green: #748354;
+  --text-amber: #748354;
+  --walnut: #2E3D28;
+  --text-walnut: #2E3D28;
+
+  --border-light: rgba(46, 61, 40, 0.12);
+  --border-medium: rgba(46, 61, 40, 0.25);
+  --border-walnut: #2E3D28;
+  --border-color: rgba(46, 61, 40, 0.12);
+  --card-bg: #ffffff;
+
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+
+  --amber: #8f9f6e;
+  --amber-50: #f6f8f1;
+  --amber-100: #e9eedf;
+  --amber-200: #d6dfc3;
+  --amber-300: #bfd0a4;
+  --amber-400: #A9B887;
+  --amber-500: #8f9f6e;
+  --amber-600: #748354;
+  --amber-700: #59653e;
+  --amber-800: #3e4729;
+  --sage-50: #f6f8f1;
+  --sage-100: #e9eedf;
+  --sage-200: #d6dfc3;
+  --sage-300: #bfd0a4;
+  --sage-600: #8f9f6e;
+  --sage-700: #748354;
+  --sage-800: #59653e;
+  --sage-900: #3e4729;
+  --walnut-50: #f2f5f0;
+  --walnut-100: #e3e8e0;
+  --walnut-200: #c4cdc0;
+  --walnut-300: #a1ae9b;
+  --walnut-400: #687a60;
+  --walnut-500: #495a41;
+
+  --button-ripple-color: rgba(169, 184, 135, 0.35);
+}
+
+/* ==========================================================================
+   GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.65;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+/* Scrollbar Styled in Sage & Walnut */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--sage-400);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sage);
+}
+
+/* Focus Rings (Amber Glow) */
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Typography Utilities */
+.font-heading { font-family: var(--font-heading); }
+.font-serif { font-family: var(--font-serif); }
+.font-sans { font-family: var(--font-sans); }
+.font-body { font-family: var(--font-body); }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Ensure all text on dark backgrounds is readable */
+p, span, li, label, td, th, blockquote {
+  color: inherit;
+}
+
+input, textarea, select {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-subtle);
+}
+
+h1 { font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 800; }
+h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; }
+h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 700; }
+h4 { font-size: 1.125rem; font-weight: 600; }
+
+/* Micro-Animations & Keyframes */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1.5deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(169, 184, 135, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(169, 184, 135, 0); }
+}
+
+@keyframes glow-pulse-sage {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(135, 169, 107, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(135, 169, 107, 0); }
+}
+
+@keyframes scan-line {
+  0% { top: 10%; opacity: 0.8; }
+  50% { top: 90%; opacity: 1; }
+  100% { top: 10%; opacity: 0.8; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@keyframes progress-bar {
+  from { width: 0; }
+  to { width: var(--target-width, 70%); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Skeleton Loading in Soft Sage */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--sage-100) 50%, var(--bg-secondary) 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: var(--radius-md);
+}
+
+/* Container Utilities */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.container-sm {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.container-lg {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.section {
+  padding: var(--space-20) 0;
+}
+
+.section-lg {
+  padding: var(--space-32) 0;
+}
+
+/* ==========================================================================
+   BUTTONS (Amber Glow Primary, Sage Secondary / Walnut Outlined)
+   Hover: darker shade + lift; Disabled: faded sage
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  border: 1.5px solid transparent;
+  letter-spacing: -0.01em;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Primary Button: Sage Green with Deep Olive Text */
+.btn-primary, .btn-accent {
+  background: var(--sage-green);
+  color: var(--deep-olive);
+  border-color: var(--sage-green);
+  box-shadow: var(--shadow-sage);
+}
+
+.btn-primary:hover, .btn-accent:hover {
+  background: var(--sage-600);
+  border-color: var(--sage-600);
+  box-shadow: var(--shadow-green-lg);
+  transform: translateY(-2px);
+  color: var(--deep-olive);
+}
+
+/* Secondary Button: Sage Green / Sage Outline */
+.btn-secondary {
+  background: var(--sage);
+  color: #ffffff;
+  border-color: var(--sage);
+  box-shadow: var(--shadow-sage);
+}
+
+.btn-secondary:hover {
+  background: var(--sage-600);
+  border-color: var(--sage-600);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-green-lg);
+  color: #ffffff;
+}
+
+/* Outline Secondary Button: Walnut Border or Sage Outline */
+.btn-outline, .btn-outline-walnut {
+  background: transparent;
+  color: var(--walnut);
+  border: 1.5px solid var(--walnut);
+}
+
+.btn-outline:hover, .btn-outline-walnut:hover {
+  background: var(--walnut-100);
+  color: var(--walnut);
+  transform: translateY(-2px);
+}
+
+.btn-outline-sage {
+  background: transparent;
+  color: var(--walnut);
+  border: 1.5px solid var(--sage);
+}
+
+.btn-outline-sage:hover {
+  background: var(--sage-100);
+  color: var(--walnut);
+  transform: translateY(-2px);
+}
+
+/* Ghost Button */
+.btn-ghost {
+  background: transparent;
+  color: var(--walnut);
+  border-color: transparent;
+}
+
+.btn-ghost:hover {
+  background: var(--sage-100);
+  color: var(--walnut);
+  transform: translateY(-1px);
+}
+
+/* White Button */
+.btn-white {
+  background: var(--soft-white);
+  color: var(--deep-olive);
+  border-color: var(--soft-white);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-white:hover {
+  background: var(--sage-600);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+  color: var(--deep-olive);
+}
+
+/* Button Sizes */
+.btn-lg {
+  padding: var(--space-4) var(--space-8);
+  font-size: 1rem;
+}
+
+.btn-sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.8125rem;
+}
+
+.btn-xs {
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+}
+
+.btn-icon {
+  padding: var(--space-3);
+  border-radius: var(--radius-full);
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.btn-icon-sm {
+  padding: var(--space-2);
+  border-radius: var(--radius-full);
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+/* Disabled Button: Faded Sage */
+.btn:disabled, button:disabled {
+  background: var(--sage-200) !important;
+  color: var(--sage-600) !important;
+  border-color: var(--sage-200) !important;
+  opacity: 0.65 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   CARDS & PANELS (Soft Walnut Shadow, Rounded 16-20px, Subtle Hover Lift)
+   ========================================================================== */
+.card {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: var(--sage-400);
+}
+
+.card-warm {
+  background: var(--bg-card-warm);
+  color: var(--text-primary);
+}
+
+.card-sage {
+  background: var(--sage-50);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.card-walnut {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.card-amber {
+  background: var(--amber-50);
+  color: var(--text-primary);
+  border-color: var(--border-medium);
+}
+
+.card-body {
+  padding: var(--space-6);
+}
+
+/* ==========================================================================
+   INPUT FORMS (Rounded, Walnut border, Amber focus ring, Walnut labels)
+   ========================================================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-label {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.form-input, .profile-input {
+  padding: var(--space-3) var(--space-4);
+  border: 1.5px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.form-input:focus, .profile-input:focus, select:focus, textarea:focus {
+  border-color: var(--sage-400);
+  box-shadow: 0 0 0 3px rgba(169, 184, 135, 0.25);
+  outline: none;
+}
+
+.form-input::placeholder, .profile-input::placeholder {
+  color: var(--text-subtle);
+}
+
+.form-input-lg {
+  padding: var(--space-4) var(--space-5);
+  font-size: 1rem;
+  border-radius: var(--radius-lg);
+}
+
+select.form-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23E8E9DF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+/* ==========================================================================
+   BADGES, TAGS, CHIPS & ACCORDIONS (Strict 3-Color Palette)
+   ========================================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.badge-green, .badge-sage {
+  background: var(--sage-100);
+  color: var(--sage-900);
+  border: 1px solid var(--border-medium);
+}
+
+.badge-accent, .badge-amber {
+  background: var(--amber-100);
+  color: var(--amber-900);
+  border: 1px solid var(--border-medium);
+}
+
+.badge-walnut {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+}
+
+.badge-neutral {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+}
+
+/* Label Overline */
+.label-overline {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 1;
+}
+
+/* Progress Bar (Sage Green fill, light sage container) */
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(232, 233, 223, 0.18);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: #A9B887;
+  animation: progress-bar 1s ease-out forwards;
+}
+
+.progress-bar-fill.amber {
+  background: var(--amber);
+}
+
+.progress-bar-fill.walnut {
+  background: var(--walnut);
+}
+
+/* Chips */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1.5px solid var(--border-medium);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.chip:hover, .chip.active {
+  border-color: var(--sage-400);
+  background: var(--sage-100);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.chip.active {
+  border-color: var(--amber);
+  background: var(--sage-100);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: var(--space-6) 0;
+}
+
+/* Tooltips */
+.tooltip-box {
+  background: var(--walnut);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--border-medium);
+}
+
+td {
+  padding: 0.75rem 1rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+tr:nth-child(even) td {
+  background: var(--bg-secondary);
+}
+
+tr:hover td {
+  background: var(--bg-card-warm);
+}
+
+/* Nutrition Color Indicators (Strict Palette) */
+.nutrition-calories { color: var(--amber); }
+.nutrition-protein { color: var(--amber); }
+.nutrition-carbs { color: var(--sage); }
+.nutrition-fat { color: var(--walnut); }
+.nutrition-fiber { color: var(--sage); }
+
+.bar-calories { background: var(--amber); }
+.bar-protein { background: var(--amber); }
+.bar-carbs { background: var(--sage); }
+.bar-fat { background: var(--walnut); }
+.bar-fiber { background: var(--sage-600); }
+
+/* Flex & Grid Layout Utilities */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+.grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-6); }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-1 { gap: var(--space-1); }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.gap-4 { gap: var(--space-4); }
+.gap-6 { gap: var(--space-6); }
+.gap-8 { gap: var(--space-8); }
+.flex-1 { flex: 1; }
+.flex-wrap { flex-wrap: wrap; }
+.shrink-0 { flex-shrink: 0; }
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .container { padding: 0 var(--space-4); }
+  .section { padding: var(--space-12) 0; }
+  .section-lg { padding: var(--space-20) 0; }
+  .btn-lg { padding: var(--space-3) var(--space-6); font-size: 0.9375rem; }
+}
+
+/* === SECTION HEADING with Sage Green Left Bar === */
+.section-heading-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.section-heading-bar::before {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 22px;
+  background: #A9B887;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* === FLAT CARD BORDER (no shadow) === */
+.card {
+  box-shadow: none !important;
+}
+.card:hover {
+  box-shadow: none !important;
+}
+
+/* === TAB PILL ACTIVE (sage fill, deep olive text) === */
+.tab-pill-active, [data-state="active"].tab-pill {
+  background: #A9B887 !important;
+  color: #2E3D28 !important;
+  border: 1.5px solid #A9B887 !important;
+  box-shadow: none !important;
+}
+
+/* === TAB PILL INACTIVE (outline sage, soft white text) === */
+.tab-pill-inactive, [data-state="inactive"].tab-pill {
+  background: transparent !important;
+  color: #E8E9DF !important;
+  border: 1.5px solid #A9B887 !important;
+}

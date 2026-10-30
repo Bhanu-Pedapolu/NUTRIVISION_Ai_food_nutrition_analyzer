@@ -1,0 +1,259 @@
+/* NutriVision — Navbar: Sage Green bar, Deep Olive text */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  background: #A9B887;
+  transition: background var(--transition-base);
+  padding: 0.85rem 0;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  border-bottom: none;
+  box-shadow: none;
+  border-radius: 0 0 10px 10px;
+}
+
+.navbar--scrolled {
+  background: #A9B887;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0.75rem 0;
+  min-height: 64px;
+  box-shadow: none;
+  border-bottom: none;
+}
+
+.navbar__inner {
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.navbar__logo:hover {
+  opacity: 0.88;
+  transform: scale(1.02);
+}
+
+.navbar__logo-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar__logo-icon svg {
+  width: 100%;
+  height: 100%;
+  color: #2E3D28;
+  fill: #2E3D28;
+}
+
+.navbar__logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #2E3D28;
+  letter-spacing: -0.02em;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar__link-hover-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.55rem 1rem !important;
+  transition: all var(--transition-fast);
+  color: #2E3D28 !important;
+  border-radius: var(--radius-full) !important;
+  border: 1.5px solid transparent !important;
+}
+
+.navbar__link-hover-btn:hover {
+  color: #2E3D28 !important;
+  background: rgba(46, 61, 40, 0.15) !important;
+  border-color: transparent !important;
+}
+
+.navbar__link-hover-btn--active {
+  color: #E8E9DF !important;
+  background: #2E3D28 !important;
+  border-color: #2E3D28 !important;
+  box-shadow: none !important;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+.navbar__analyze-btn {
+  font-size: 0.9rem !important;
+  padding: 0.55rem 1.2rem !important;
+  height: 40px !important;
+  background: #2E3D28 !important;
+  color: #E8E9DF !important;
+  border-radius: 8px !important;
+  border: none !important;
+}
+
+.navbar__analyze-btn:hover {
+  background: #344a2e !important;
+  color: #E8E9DF !important;
+}
+
+.navbar__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: #2E3D28;
+  color: #E8E9DF;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+  border: 2px solid rgba(46, 61, 40, 0.4);
+}
+
+.navbar__avatar:hover {
+  transform: scale(1.06);
+  box-shadow: none;
+}
+
+.navbar__hamburger {
+  display: none;
+  padding: var(--space-2);
+  color: #2E3D28;
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.navbar__hamburger:hover {
+  background: rgba(46, 61, 40, 0.15);
+}
+
+/* Dropdown — Deep Olive */
+.navbar__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: var(--space-6);
+  width: 280px;
+  background: #2E3D28;
+  border: 1.5px solid #A9B887;
+  border-radius: 12px;
+  box-shadow: none;
+  padding: var(--space-3);
+  z-index: var(--z-dropdown);
+  color: #E8E9DF;
+}
+
+.navbar__dropdown-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  background: rgba(169, 184, 135, 0.15);
+}
+
+.navbar__dropdown-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: #A9B887;
+  color: #2E3D28;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.navbar__dropdown-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #E8E9DF;
+}
+
+.navbar__dropdown-email {
+  font-size: 0.72rem;
+  color: rgba(232, 233, 223, 0.75);
+}
+
+.navbar__dropdown-divider {
+  height: 1px;
+  background: rgba(169, 184, 135, 0.3);
+  margin: var(--space-2) 0;
+}
+
+.navbar__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: #E8E9DF;
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+
+.navbar__dropdown-item:hover, .navbar__dropdown-item.active {
+  background: rgba(169, 184, 135, 0.2);
+  color: #E8E9DF;
+}
+
+.navbar__dropdown-logout {
+  color: rgba(232, 233, 223, 0.75);
+}
+
+.navbar__dropdown-logout:hover {
+  background: rgba(169, 184, 135, 0.2);
+  color: #E8E9DF;
+}
+
+@media (max-width: 960px) {
+  .navbar__links {
+    display: none;
+  }
+  .navbar__hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbar__dropdown {
+    left: var(--space-4);
+    right: var(--space-4);
+    width: auto;
+  }
+}
