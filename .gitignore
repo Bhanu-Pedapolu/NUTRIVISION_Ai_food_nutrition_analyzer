@@ -40,3 +40,9 @@ backend/data/kaggle_dataset/
 backend/data/*.sqlite
 backend/data/*.sqlite-journal
 
+# Large video/media files (use Git LFS or cloud hosting instead)
+public/*.mp4
+public/*.mov
+public/*.avi
+public/*.mkv
+
