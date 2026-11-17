@@ -105,15 +105,6 @@ export function LandingPage() {
   const navigate = useNavigate();
   const [showVideoModal, setShowVideoModal] = useState(false);
 
-  // Play entry video at the beginning of website visit
-  useEffect(() => {
-    const hasSeenIntro = sessionStorage.getItem('nutrivision_intro_played');
-    if (!hasSeenIntro) {
-      setShowVideoModal(true);
-      sessionStorage.setItem('nutrivision_intro_played', 'true');
-    }
-  }, []);
-
   return (
     <div className="landing">
       {/* Hero Section */}
@@ -206,10 +197,10 @@ export function LandingPage() {
               <HoverButton
                 onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
                 className="text-base px-7 py-3.5 font-semibold"
-                backgroundColor="transparent"
-                textColor="#2E3D28"
-                hovertextColor="#2E3D28"
-                glowColor="rgba(169, 184, 135, 0.3)"
+                backgroundColor="rgba(169, 184, 135, 0.12)"
+                textColor="#E8E9DF"
+                hoverTextColor="#ffffff"
+                glowColor="rgba(169, 184, 135, 0.4)"
                 style={{ border: '2px solid #A9B887' }}
                 id="hero-cta-secondary"
               >
@@ -600,7 +591,7 @@ export function LandingPage() {
         <div className="container">
           <div className="qr-highlight__inner">
             <FadeIn className="qr-highlight__text">
-              <p className="label-overline" style={{ color: '#A9B887' }}>Phone to Laptop Sync</p>
+              <p className="label-overline" style={{ color: '#4A5E3D', fontWeight: 700 }}>Phone to Laptop Sync</p>
               <h2 id="qr-heading" className="qr-highlight__heading">
                 Snap From Phone.<br />Analyze on Screen.
               </h2>
@@ -618,9 +609,9 @@ export function LandingPage() {
               <HoverButton
                 onClick={() => navigate('/register')}
                 className="text-base px-7 py-3.5 font-semibold"
-                backgroundColor="#A9B887"
+                backgroundColor="#2E3D28"
                 glowColor="#A9B887"
-                textColor="#ffffff"
+                textColor="#E8E9DF"
                 hoverTextColor="#ffffff"
                 id="qr-cta"
               >
@@ -629,11 +620,15 @@ export function LandingPage() {
             </FadeIn>
 
             <FadeIn delay={0.3} className="qr-highlight__visual">
-              <div className="qr-highlight__phone" aria-hidden="true">
-                <div className="qr-highlight__phone-screen">
-                  <img src="/hero-food.jpg" alt="" className="img-cover" loading="lazy" />
-                  <div className="qr-highlight__scan-frame" />
-                  <div className="qr-highlight__success">
+              <div className="qr-highlight__preview-card">
+                <div className="qr-highlight__image-wrapper">
+                  <img
+                    src="/ai-nutrition-analysis.jpg"
+                    alt="AI Nutrition Analysis Plate with Real-Time Calorie & Macro Breakdown"
+                    className="qr-highlight__preview-img"
+                    loading="lazy"
+                  />
+                  <div className="qr-highlight__badge">
                     <Check size={16} />
                     <span>Photo Synced!</span>
                   </div>
@@ -645,7 +640,7 @@ export function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="testimonials-section" aria-labelledby="testimonials-heading">
+      <section id="testimonials" className="testimonials-section" aria-labelledby="testimonials-heading">
         <div className="container">
           <FadeIn>
             <div className="testimonials-section__header">
@@ -706,10 +701,10 @@ export function LandingPage() {
               <HoverButton
                 onClick={() => navigate('/login')}
                 className="text-base px-8 py-4 font-semibold"
-                backgroundColor="transparent"
-                textColor="#2E3D28"
-                hovertextColor="#2E3D28"
-                glowColor="rgba(169, 184, 135, 0.3)"
+                backgroundColor="rgba(169, 184, 135, 0.12)"
+                textColor="#E8E9DF"
+                hoverTextColor="#ffffff"
+                glowColor="rgba(169, 184, 135, 0.5)"
                 style={{ border: '2px solid #A9B887' }}
                 id="footer-cta-login"
               >
@@ -770,7 +765,7 @@ export function LandingPage() {
       <EntryVideoModal
         isOpen={showVideoModal}
         onClose={() => setShowVideoModal(false)}
-        targetPath="/dashboard"
+        targetPath="/analyze"
       />
     </div>
   );

@@ -1,8 +1,7 @@
 // NutriVision — Main Application Router & Entry
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { Bot, Sparkles } from 'lucide-react';
 import { useAppStore } from './store/useAppStore';
 import { Navbar } from './components/Navbar';
 
@@ -22,30 +21,8 @@ import { GroceryPage } from './pages/GroceryPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { QRCompanionPage } from './pages/QRCompanionPage';
 import { CalorieCalculatorPage } from './pages/CalorieCalculatorPage';
+import './App.css';
 
-function FloatingChatLauncher() {
-  const location = useLocation();
-  const { isAuthenticated } = useAppStore();
-
-  if (!isAuthenticated || location.pathname === '/chat' || location.pathname === '/qr-mobile') {
-    return null;
-  }
-
-  return (
-    <Link to="/chat" className="floating-nutribot-btn" title="Ask NutriBot AI" id="floating-chat-btn">
-      <span className="fnb-pulse-ring" />
-      <span className="fnb-pulse-ring fnb-pulse-ring-2" />
-      <span className="fnb-icon-wrap">
-        <Bot size={22} />
-      </span>
-      <span className="fnb-body">
-        <span className="fnb-title">Ask NutriBot</span>
-        <span className="fnb-sub">AI Nutrition Assistant</span>
-      </span>
-      <span className="fnb-dot" />
-    </Link>
-  );
-}
 
 export default function App() {
   const { theme } = useAppStore();
@@ -100,8 +77,6 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
-
-        <FloatingChatLauncher />
 
         <Toaster
           position="bottom-right"

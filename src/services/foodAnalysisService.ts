@@ -4,12 +4,17 @@
 import type { FoodAnalysis } from '../types';
 import { DEMO_ANALYSIS } from '../data/demoData';
 
-// Dynamic API base URL that works on localhost, LAN IP (mobile), and proxies
+// Dynamic API base URL that works on localhost, LAN IP (mobile), Vercel production, and proxies
 export const getApiUrl = (path: string): string => {
-  if (typeof window !== 'undefined') {
-    return path.startsWith('/') ? path : `/${path}`;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const envUrl = (import.meta.env.VITE_API_URL as string | undefined)?.trim();
+  if (envUrl) {
+    return `${envUrl.replace(/\/$/, '')}${cleanPath}`;
   }
-  return `http://localhost:8000${path.startsWith('/') ? path : `/${path}`}`;
+  if (typeof window !== 'undefined') {
+    return cleanPath;
+  }
+  return `http://localhost:8000${cleanPath}`;
 };
 
 export interface AnalysisResult {

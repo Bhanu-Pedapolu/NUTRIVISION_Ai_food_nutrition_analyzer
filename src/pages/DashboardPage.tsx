@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { HoverButton } from '@/components/ui/hover-glow-button';
-import { Camera, Upload, QrCode, Droplets, TrendingUp, Calendar, Leaf, Plus, ChevronRight, Zap, Flame } from 'lucide-react';
+import { Camera, Upload, QrCode, Droplets, TrendingUp, Calendar, Leaf, Plus, ChevronRight, Zap, Flame, Bot, Sparkles } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 import { getWeatherFromGeolocation, DEMO_WEATHER } from '../services/weatherService';
 import type { WeatherData } from '../services/weatherService';
@@ -10,6 +10,10 @@ import { DEMO_MEAL_PLAN, FOOD_IMAGES } from '../data/demoData';
 import { RadialBarChart, RadialBar, Cell, PieChart, Pie, Tooltip, ResponsiveContainer } from 'recharts';
 import './DashboardPage.css';
 import { HydrationCard } from '../components/HydrationCard';
+import { ScanGridButton } from '../components/ScanGridButton';
+import { TinctureSlosh } from '../components/TinctureSlosh';
+import { IsometricButton } from '../components/IsometricButton';
+import { GlowButton } from '../components/GlowButton';
 
 const GREETING = () => {
   const h = new Date().getHours();
@@ -79,8 +83,131 @@ export function DashboardPage() {
             </div>
           </motion.div>
 
-          {/* Weather Card */}
+          {/* AI Chatbot Button (Replaced Weather Card) */}
           <motion.div variants={stagger.item}>
+            <div
+              className="dashboard__chatbot-card"
+              id="dashboard-chatbot-btn"
+              aria-label="Open NutriBot AI Chat"
+            >
+              <div className="dashboard__chatbot-card-ambient" />
+
+              <div className="dashboard__chatbot-top">
+                <div className="dashboard__chatbot-badge">
+                  <span className="dashboard__chatbot-live-dot" />
+                  <span>AI ONLINE</span>
+                </div>
+                <div className="dashboard__chatbot-icon-box">
+                  <Bot size={20} aria-hidden="true" />
+                </div>
+              </div>
+
+              <div className="dashboard__chatbot-info">
+                <div className="dashboard__chatbot-title">
+                  Ask NutriBot AI
+                  <Sparkles size={14} style={{ color: '#C5D89A' }} />
+                </div>
+                <p className="dashboard__chatbot-desc">
+                  Instant guidance on meals, calories & diets
+                </p>
+              </div>
+
+              {/* Previous button commented out for easy revert:
+              <div className="dashboard__chatbot-action-btn">
+                <span>Start Chat</span>
+                <span className="dashboard__chatbot-arrow">→</span>
+              </div>
+              */}
+
+              {/* TinctureSlosh WebGL2 Water-Filled Interactive Button (commented for easy revert):
+              <div
+                className="dashboard__tincture-wrapper"
+                style={{ position: 'relative', width: 336, height: 45, marginTop: 'auto' }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    width: 840,
+                    height: 560,
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  <TinctureSlosh
+                    label="Start Chat →"
+                    background="#263521"
+                    textColor="#111111"
+                    buttonWidth={480}
+                    buttonHeight={64}
+                    radius={20}
+                    fade={2.5}
+                    colors={{
+                      mode: 'mono',
+                      dye: '#7A8B2E',
+                      base: '#FFFFFF',
+                    }}
+                    response={{ pour: 5, stir: 5, swirl: 5, ripple: 5, wobble: 5, reach: 0 }}
+                    reflection={{ intensity: 25, distance: 18, blur: 15 }}
+                    advanced={{ vignette: 0 }}
+                    font={{ fontFamily: 'Inter', fontWeight: 700, fontSize: '26px' }}
+                    link="/chat"
+                    style={{ pointerEvents: 'none' }}
+                  />
+                </div>
+              </div>
+              */}
+
+              {/* IsometricButton (3D Keycap Button with glowing underside) */}
+              <div
+                className="dashboard__isometric-btn-wrapper"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '24px 8px',
+                  marginTop: 'auto',
+                  width: '100%',
+                }}
+              >
+                <IsometricButton
+                  label="Start Chat →"
+                  rounded={45}
+                  padding="18px 36px"
+                  font={{
+                    fontFamily: "Inter",
+                    fontWeight: 700,
+                    fontSize: 18,
+                    letterSpacing: "0.5px",
+                  }}
+                  colors={{
+                    fill: "#1B2412",
+                    textColor: "#B7C86A",
+                    hoverTextColor: "#FFFFFF",
+                  }}
+                  prism={{
+                    color: "#7A8B2E",
+                    thickness: 15,
+                    float: 8,
+                    hoverFloat: 7,
+                    intensity: 100,
+                  }}
+                  camera={{ tilt: 49, rotate: -37 }}
+                  addIcon={false}
+                  icon={{
+                    color: "#B7C86A",
+                    hoverColor: "#FFFFFF",
+                    symbol: "→",
+                    size: 20,
+                  }}
+                  link="/chat"
+                  newTab={false}
+                  onClick={() => navigate('/chat')}
+                />
+              </div>
+            </div>
+
+            {/* Previous weather card commented for easy revert:
             <Link to="/weather" className={`dashboard__weather-card ${weather ? `weather--${weather.weatherType}` : ''}`} id="dashboard-weather-card">
               {weatherLoading ? (
                 <div className="skeleton" style={{ width: '100%', height: '100%', borderRadius: 'var(--radius-xl)' }} />
@@ -101,6 +228,7 @@ export function DashboardPage() {
                 </>
               ) : null}
             </Link>
+            */}
           </motion.div>
 
           {/* ---- MAIN ANALYZER CARD ---- */}
@@ -116,6 +244,7 @@ export function DashboardPage() {
                 <p className="dashboard__analyzer-desc">Take a photo or upload a food image to discover what's inside.</p>
               </div>
               <div className="dashboard__analyzer-actions">
+                {/* Previous buttons commented out for easy revert:
                 <Link to="/analyze?mode=camera" className="dashboard__analyzer-btn" id="dashboard-camera-btn">
                   <Camera size={20} aria-hidden="true" />
                   <div>
@@ -144,6 +273,87 @@ export function DashboardPage() {
                     <div className="dashboard__analyzer-btn-sub">Daily calories</div>
                   </div>
                 </Link>
+                */}
+
+                <ScanGridButton
+                  id="dashboard-camera-btn"
+                  label="Take Photo"
+                  link="/analyze?mode=camera"
+                  rounded={30}
+                  padding="16px 40px"
+                  font={{ fontFamily: "Inter", fontWeight: 600, fontSize: 18, letterSpacing: "0.5px", lineHeight: "1.5em" }}
+                  colors={{
+                    fill: "#FFFFFF",
+                    hoverFill: "#F0F7FF",
+                    textColor: "#0B2A5B",
+                    hoverTextColor: "#0066CC"
+                  }}
+                  scan={{ color: "#3B9EFF", speed: 50 }}
+                  border={{ borderWidth: 1.5, borderStyle: "solid", borderColor: "rgba(59,158,255,0.5)" }}
+                  glitchIntensity={0}
+                  addIcon={false}
+                  icon={{ color: "#0B2A5B", hoverColor: "#3B9EFF", symbol: "→", size: 22 }}
+                />
+
+                <ScanGridButton
+                  id="dashboard-upload-btn"
+                  label="Upload"
+                  link="/analyze?mode=upload"
+                  rounded={30}
+                  padding="16px 40px"
+                  font={{ fontFamily: "Inter", fontWeight: 600, fontSize: 18, letterSpacing: "0.5px", lineHeight: "1.5em" }}
+                  colors={{
+                    fill: "#FFFFFF",
+                    hoverFill: "#F0F7FF",
+                    textColor: "#0B2A5B",
+                    hoverTextColor: "#0066CC"
+                  }}
+                  scan={{ color: "#3B9EFF", speed: 50 }}
+                  border={{ borderWidth: 1.5, borderStyle: "solid", borderColor: "rgba(59,158,255,0.5)" }}
+                  glitchIntensity={0}
+                  addIcon={false}
+                  icon={{ color: "#0B2A5B", hoverColor: "#3B9EFF", symbol: "→", size: 22 }}
+                />
+
+                <ScanGridButton
+                  id="dashboard-qr-btn"
+                  label="Scan QR"
+                  link="/analyze?mode=qr"
+                  rounded={30}
+                  padding="16px 40px"
+                  font={{ fontFamily: "Inter", fontWeight: 600, fontSize: 18, letterSpacing: "0.5px", lineHeight: "1.5em" }}
+                  colors={{
+                    fill: "#FFFFFF",
+                    hoverFill: "#F0F7FF",
+                    textColor: "#0B2A5B",
+                    hoverTextColor: "#0066CC"
+                  }}
+                  scan={{ color: "#3B9EFF", speed: 50 }}
+                  border={{ borderWidth: 1.5, borderStyle: "solid", borderColor: "rgba(59,158,255,0.5)" }}
+                  glitchIntensity={0}
+                  addIcon={false}
+                  icon={{ color: "#0B2A5B", hoverColor: "#3B9EFF", symbol: "→", size: 22 }}
+                />
+
+                <ScanGridButton
+                  id="dashboard-calc-btn"
+                  label="Calculator"
+                  link="/calculator"
+                  rounded={30}
+                  padding="16px 40px"
+                  font={{ fontFamily: "Inter", fontWeight: 600, fontSize: 18, letterSpacing: "0.5px", lineHeight: "1.5em" }}
+                  colors={{
+                    fill: "#FFFFFF",
+                    hoverFill: "#F0F7FF",
+                    textColor: "#0B2A5B",
+                    hoverTextColor: "#0066CC"
+                  }}
+                  scan={{ color: "#3B9EFF", speed: 50 }}
+                  border={{ borderWidth: 1.5, borderStyle: "solid", borderColor: "rgba(59,158,255,0.5)" }}
+                  glitchIntensity={0}
+                  addIcon={false}
+                  icon={{ color: "#0B2A5B", hoverColor: "#3B9EFF", symbol: "→", size: 22 }}
+                />
               </div>
             </div>
           </motion.div>
@@ -207,7 +417,9 @@ export function DashboardPage() {
           </motion.div>
 
           {/* ---- HYDRATION CARD (Body Water Balance) ---- */}
-          <HydrationCard />
+          <div id="hydration" className="scroll-mt-24">
+            <HydrationCard />
+          </div>
 
           {/* ---- TODAY'S MEAL PLAN ---- */}
           <motion.div className="dashboard__meal-plan card" variants={stagger.item}>
@@ -277,6 +489,7 @@ export function DashboardPage() {
                 <div className="dashboard__empty-icon">📸</div>
                 <p className="dashboard__empty-title">Your food journey starts here.</p>
                 <p className="dashboard__empty-desc">Analyze your first meal and your history will appear here.</p>
+                {/* Old button kept for revert:
                 <HoverButton
                   onClick={() => navigate('/analyze')}
                   className="text-sm px-5 py-2.5 font-semibold"
@@ -288,6 +501,15 @@ export function DashboardPage() {
                 >
                   Analyze Food
                 </HoverButton>
+                */}
+                <div style={{ position: 'relative', overflow: 'visible', isolation: 'isolate', display: 'inline-block' }}>
+                  <GlowButton
+                    onClick={() => navigate('/analyze')}
+                    id="dashboard-empty-analyze"
+                    className="text-sm font-semibold"
+                    label="Analyze Food"
+                  />
+                </div>
               </div>
             ) : (
               <div className="dashboard__history-list">

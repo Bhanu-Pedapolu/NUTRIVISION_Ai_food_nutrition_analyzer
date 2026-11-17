@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { HoverButton } from '@/components/ui/hover-glow-button';
+import { GlowButton } from '../components/GlowButton';
 import { useAppStore } from '../store/useAppStore';
 import type { DietPreference, NutritionGoal, ActivityLevel } from '../types';
 import './ProfilePage.css';
@@ -202,7 +203,8 @@ export function ProfilePage() {
               />
             </div>
 
-            <div className="profile-card-footer">
+            <div className="profile-card-footer" style={{ position: 'relative', overflow: 'visible', isolation: 'isolate' }}>
+              {/* Old button kept for revert:
               <HoverButton
                 type="submit"
                 className="w-full text-base px-6 py-3.5 font-bold"
@@ -216,6 +218,17 @@ export function ProfilePage() {
                   <Save size={18} /> Save Settings & Recalibrate AI
                 </span>
               </HoverButton>
+              */}
+              <GlowButton
+                type="submit"
+                id="save-profile-btn"
+                className="w-full text-base font-bold"
+                label={
+                  <span className="inline-flex items-center justify-center gap-2">
+                    <Save size={18} /> Save Settings & Recalibrate AI
+                  </span>
+                }
+              />
             </div>
           </div>
         </form>

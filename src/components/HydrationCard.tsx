@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import { useAppStore } from '../store/useAppStore';
 import { getTodayHydration, saveTodayHydration, getLocalDateKey } from '../utils/hydrationStorage';
 import './HydrationCard.css';
+import { BodyWater } from './BodyWater';
 
 // Precise symmetrical human body silhouette path (viewBox: 0 0 120 290)
 // Head top: y=12, Bottom of feet: y=280 -> height span = 268 units
@@ -213,6 +214,17 @@ export function HydrationCard({ className = '' }: HydrationCardProps) {
       <div className="bwc__visual-container">
         {/* Left: Human Body Silhouette with Wave Water Surface */}
         <div className="bwc__body-silhouette-wrapper">
+          <BodyWater
+            percent={percentage}
+            label="H2O"
+            width={95}
+            height={195}
+            waterColor="#38BDF8"
+            dyeColor="#00E5FF"
+            fade={3}
+          />
+
+          {/* Previous SVG body graphic commented out for easy revert:
           <svg
             viewBox="0 0 120 290"
             className="bwc__body-svg"
@@ -225,13 +237,11 @@ export function HydrationCard({ className = '' }: HydrationCardProps) {
               </clipPath>
             </defs>
 
-            {/* Unfilled Silhouette Background Tint */}
             <path
               d={BODY_SILHOUETTE_PATH}
               className="bwc__body-unfilled"
             />
 
-            {/* Rising Water with Animated Wave Surface */}
             {totalMl > 0 && (
               <g clipPath={`url(#body-clip-${clipId})`}>
                 <g
@@ -241,12 +251,10 @@ export function HydrationCard({ className = '' }: HydrationCardProps) {
                     transition: 'transform 500ms cubic-bezier(0.4, 0, 0.2, 1)',
                   }}
                 >
-                  {/* Looping Smooth Animated Wave on Water Surface */}
                   <path
                     className="bwc__wave-path"
                     d="M -120 0 Q -90 -4.5 -60 0 T 0 0 T 60 0 T 120 0 T 180 0 T 240 0 V 300 H -120 Z"
                   />
-                  {/* Under-Wave Water Body Fill */}
                   <rect
                     x="-60"
                     y="0"
@@ -258,13 +266,11 @@ export function HydrationCard({ className = '' }: HydrationCardProps) {
               </g>
             )}
 
-            {/* Subtle Outer Silhouette Contour */}
             <path
               d={BODY_SILHOUETTE_PATH}
               className="bwc__body-outline"
             />
 
-            {/* H2O Emblem across Chest */}
             <text
               x="60"
               y="112"
@@ -274,6 +280,7 @@ export function HydrationCard({ className = '' }: HydrationCardProps) {
               H2O
             </text>
           </svg>
+          */}
         </div>
 
         {/* Right: Glasses Grid (2 Columns) */}

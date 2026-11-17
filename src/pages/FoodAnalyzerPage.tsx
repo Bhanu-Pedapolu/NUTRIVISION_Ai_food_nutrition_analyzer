@@ -10,6 +10,7 @@ import {
 import toast from 'react-hot-toast';
 import QRCode from 'react-qr-code';
 import { HoverButton } from '@/components/ui/hover-glow-button';
+import { GlowButton } from '../components/GlowButton';
 import { useAppStore } from '../store/useAppStore';
 import { 
   analyzeFood, 
@@ -552,6 +553,7 @@ export function FoodAnalyzerPage() {
                     </div>
 
                     <div className="mobile-photo-stage__actions">
+                      {/* Old button kept for revert:
                       <HoverButton
                         className="text-base px-6 py-3.5 font-semibold scan-now-btn"
                         backgroundColor="#A9B887"
@@ -565,8 +567,25 @@ export function FoodAnalyzerPage() {
                           handleAnalyzeImage(img, `Phone Scan (${src})`);
                         }}
                       >
-                        <Sparkles size={18} className="pulse-icon" /> âš¡ Scan & Analyze Nutrition Now
+                        <Sparkles size={18} className="pulse-icon" /> ⚡ Scan & Analyze Nutrition Now
                       </HoverButton>
+                      */}
+                      <div style={{ position: 'relative', overflow: 'visible', isolation: 'isolate', display: 'inline-block' }}>
+                        <GlowButton
+                          className="text-base font-semibold scan-now-btn"
+                          onClick={() => {
+                            const img = pendingMobilePhoto.image;
+                            const src = pendingMobilePhoto.source;
+                            setPendingMobilePhoto(null);
+                            handleAnalyzeImage(img, `Phone Scan (${src})`);
+                          }}
+                          label={
+                            <span className="inline-flex items-center gap-2">
+                              <Sparkles size={18} className="pulse-icon" /> ⚡ Scan & Analyze Nutrition Now
+                            </span>
+                          }
+                        />
+                      </div>
 
                       <div className="secondary-action-row">
                         <HoverButton
@@ -906,7 +925,8 @@ export function FoodAnalyzerPage() {
                   </div>
 
                   {/* Log Action Bar */}
-                  <div className="result-actions-bar">
+                  <div className="result-actions-bar" style={{ position: 'relative', overflow: 'visible', isolation: 'isolate', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                    {/* Old buttons kept for revert:
                     <HoverButton
                       className="text-base px-6 py-3 font-semibold"
                       backgroundColor="#A9B887"
@@ -932,6 +952,29 @@ export function FoodAnalyzerPage() {
                     >
                       <Share2 size={16} /> Share Stats
                     </HoverButton>
+                    */}
+                    <GlowButton
+                      className="text-base font-semibold"
+                      onClick={handleLogToDiary}
+                      id="log-to-diary-btn"
+                      label={
+                        <span className="inline-flex items-center gap-2">
+                          <Plus size={18} /> Log to Daily Diary
+                        </span>
+                      }
+                    />
+                    <GlowButton
+                      className="text-base font-semibold"
+                      onClick={() => {
+                        navigator.clipboard?.writeText(`${result.foodName}: ${currentNutrition.calories} kcal, ${currentNutrition.protein}g protein, ${currentNutrition.carbohydrates}g carbs.`);
+                        toast.success('Nutrition summary copied to clipboard!');
+                      }}
+                      label={
+                        <span className="inline-flex items-center gap-2">
+                          <Share2 size={16} /> Share Stats
+                        </span>
+                      }
+                    />
                   </div>
                 </div>
               </div>
