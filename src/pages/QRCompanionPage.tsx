@@ -44,64 +44,83 @@ export function QRCompanionPage() {
     return () => { isMounted = false; };
   }, [sessionId]);
 
-  const handlePhotoSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const compressFileToDataUrl = async (file: File): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
+      // Create memory-efficient blob URL to avoid loading 20MB into mobile JS heap
+      const blobUrl = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        try {
+          const maxDim = 800; // Optimal 800px for instant mobile Wi-Fi transfer (~80-120KB)
+          let width = img.naturalWidth || 600;
+          let height = img.naturalHeight || 600;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.80);
+            URL.revokeObjectURL(blobUrl);
+            resolve(dataUrl);
+          } else {
+            URL.revokeObjectURL(blobUrl);
+            const r = new FileReader();
+            r.onload = (ev) => resolve(ev.target?.result as string);
+            r.onerror = reject;
+            r.readAsDataURL(file);
+          }
+        } catch (err) {
+          URL.revokeObjectURL(blobUrl);
+          reject(err);
+        }
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(blobUrl);
+        const r = new FileReader();
+        r.onload = (ev) => resolve(ev.target?.result as string);
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      };
+      img.src = blobUrl;
+    });
+  };
+
+  const handlePhotoSelect = async (e: React.ChangeEvent<HTMLInputElement>, sourceName: string = 'Mobile Gallery Photo') => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     try {
-      // Compress high-res mobile camera photos to ~1024px to prevent network/proxy timeouts
-      const compressedDataUrl = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const img = new Image();
-          img.onload = () => {
-            const maxDim = 1024;
-            let width = img.naturalWidth;
-            let height = img.naturalHeight;
-            if (width > maxDim || height > maxDim) {
-              if (width > height) {
-                height = Math.round((height * maxDim) / width);
-                width = maxDim;
-              } else {
-                width = Math.round((width * maxDim) / height);
-                height = maxDim;
-              }
-            }
-            const canvas = document.createElement('canvas');
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            if (ctx) {
-              ctx.drawImage(img, 0, 0, width, height);
-              resolve(canvas.toDataURL('image/jpeg', 0.82));
-            } else {
-              resolve(event.target?.result as string);
-            }
-          };
-          img.onerror = () => resolve(event.target?.result as string);
-          img.src = event.target?.result as string;
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-
-      setSelectedPhoto(compressedDataUrl);
-      setSynced(false);
-      setErrorMsg(null);
-      // Auto-beam to laptop immediately so user doesn't have to search for a button
       setIsTransmitting(true);
-      uploadQRImage(sessionId, compressedDataUrl, 'Mobile Phone Camera').then((ok) => {
-        setIsTransmitting(false);
-        if (ok) {
-          setQRImage(compressedDataUrl);
-          setSynced(true);
-          toast.success('🚀 Photo beamed to laptop screen!', { icon: '✨' });
-        }
-      }).catch(() => {
-        setIsTransmitting(false);
-      });
+      setErrorMsg(null);
+      setSynced(false);
+
+      const compressedDataUrl = await compressFileToDataUrl(file);
+      setSelectedPhoto(compressedDataUrl);
+
+      // Auto-beam to laptop immediately so user gets instant transfer
+      const ok = await uploadQRImage(sessionId, compressedDataUrl, sourceName);
+      setIsTransmitting(false);
+      if (ok) {
+        setQRImage(compressedDataUrl);
+        setSynced(true);
+        toast.success('🚀 Photo beamed to laptop screen!', { icon: '✨' });
+      } else {
+        setErrorMsg('Could not beam photo to desktop. Please make sure both devices are on the same Wi-Fi network.');
+        toast.error('Sync failed. Please try again.');
+      }
     } catch {
-      setErrorMsg('Failed to process image from camera.');
+      setIsTransmitting(false);
+      setErrorMsg('Failed to process image from gallery/camera. Please try a different photo.');
     }
   };
 
@@ -274,7 +293,8 @@ export function QRCompanionPage() {
             ref={cameraInputRef}
             accept="image/*"
             capture="environment"
-            onChange={handlePhotoSelect}
+            onClick={(e) => { (e.target as HTMLInputElement).value = ''; }}
+            onChange={(e) => handlePhotoSelect(e, 'Mobile Live Camera')}
             style={{ display: 'none' }}
           />
 
@@ -282,8 +302,9 @@ export function QRCompanionPage() {
           <input
             type="file"
             ref={galleryInputRef}
-            accept="image/*"
-            onChange={handlePhotoSelect}
+            accept="image/jpeg,image/png,image/webp,image/jpg,image/*"
+            onClick={(e) => { (e.target as HTMLInputElement).value = ''; }}
+            onChange={(e) => handlePhotoSelect(e, 'Mobile Gallery Photo')}
             style={{ display: 'none' }}
           />
 
