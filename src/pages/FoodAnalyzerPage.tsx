@@ -262,19 +262,21 @@ export function FoodAnalyzerPage() {
           }
 
           if (session.status === 'ready' && session.image) {
-            toast.success('ðŸ“± Photo received from your phone! Ready to scan on laptop.', {
-              icon: 'ðŸ“¸',
-              duration: 4500
+            toast.success('📱 Photo received from your phone! Scanning now...', {
+              icon: '📸',
+              duration: 3500
             });
             setShowQRModal(false);
             setActiveTab('upload');
-            // Directly show the taken picture on the user's laptop screen first
+            // Directly show the taken picture on the user's laptop screen
             setPendingMobilePhoto({
               image: session.image,
               source: session.device || 'Mobile Phone Camera',
               timestamp: new Date()
             });
             setSelectedImage(session.image);
+            // Immediately start scanning and analyzing on the laptop screen
+            handleAnalyzeImage(session.image, `Phone Scan (${session.device || 'Mobile Camera'})`);
             return;
           }
         }

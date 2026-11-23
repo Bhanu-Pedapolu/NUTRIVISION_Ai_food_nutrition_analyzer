@@ -88,6 +88,18 @@ export function QRCompanionPage() {
       setSelectedPhoto(compressedDataUrl);
       setSynced(false);
       setErrorMsg(null);
+      // Auto-beam to laptop immediately so user doesn't have to search for a button
+      setIsTransmitting(true);
+      uploadQRImage(sessionId, compressedDataUrl, 'Mobile Phone Camera').then((ok) => {
+        setIsTransmitting(false);
+        if (ok) {
+          setQRImage(compressedDataUrl);
+          setSynced(true);
+          toast.success('🚀 Photo beamed to laptop screen!', { icon: '✨' });
+        }
+      }).catch(() => {
+        setIsTransmitting(false);
+      });
     } catch {
       setErrorMsg('Failed to process image from camera.');
     }
@@ -102,14 +114,22 @@ export function QRCompanionPage() {
       canvas.width = img.naturalWidth || 600;
       canvas.height = img.naturalHeight || 600;
       const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.drawImage(img, 0, 0);
-        setSelectedPhoto(canvas.toDataURL('image/jpeg', 0.9));
-      } else {
-        setSelectedPhoto(imgUrl);
-      }
+      const dataUrl = ctx ? canvas.toDataURL('image/jpeg', 0.9) : imgUrl;
+      setSelectedPhoto(dataUrl);
       setSynced(false);
       setErrorMsg(null);
+      // Auto-beam preset immediately to laptop
+      setIsTransmitting(true);
+      uploadQRImage(sessionId, dataUrl, 'Mobile Preset Meal').then((ok) => {
+        setIsTransmitting(false);
+        if (ok) {
+          setQRImage(dataUrl);
+          setSynced(true);
+          toast.success('🚀 Preset beamed to laptop screen!', { icon: '✨' });
+        }
+      }).catch(() => {
+        setIsTransmitting(false);
+      });
     };
     img.onerror = () => {
       setSelectedPhoto(imgUrl);

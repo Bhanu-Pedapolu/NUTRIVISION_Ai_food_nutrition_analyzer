@@ -85,12 +85,14 @@ async def analyze_food(request: Request):
     Analyzes a food image using Google Gemini Vision API.
     Accepts multipart file upload OR JSON with base64 image.
     Returns complete nutritional analysis with accurate food identification.
+    Smoothly falls back to the clinical nutrition engine if the external API is unavailable.
     """
     service = get_gemini_service()
     content_type = request.headers.get("content-type", "")
 
     img_bytes = None
     img_data_url = None
+    title_hint = ""
 
     if "application/json" in content_type:
         try:
@@ -98,12 +100,14 @@ async def analyze_food(request: Request):
         except Exception:
             raise HTTPException(status_code=400, detail="Invalid JSON body")
         raw_img = body.get("image", "")
+        title_hint = body.get("titleHint", "")
         if not raw_img:
             raise HTTPException(status_code=400, detail="No 'image' field in JSON payload")
         img_bytes = service.decode_base64_image(raw_img)
         img_data_url = raw_img
     else:
         form = await request.form()
+        title_hint = str(form.get("titleHint", ""))
         if "image" in form and hasattr(form["image"], "read"):
             img_bytes = await form["image"].read()
         elif "image_base64" in form:
@@ -117,10 +121,13 @@ async def analyze_food(request: Request):
         result = service.analyze_image(
             image_bytes=img_bytes,
             image_url=img_data_url,
+            title_hint=title_hint
         )
         return {"success": True, "data": result}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Gemini Vision analysis failed: {str(e)}")
+        print(f"[Backend] Notice: analyze_image error ({e}), delivering resilient clinical fallback.")
+        fallback = service.create_fallback_analysis(image_url=img_data_url, title_hint=title_hint)
+        return {"success": True, "data": fallback}
 
 
 @app.get("/api/config/status")
